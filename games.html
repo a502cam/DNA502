@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ألعاب الدواسر | ترفيه وتحديات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #121821;
+      --gold: #d4af37;
+      --text: #f4f6f8;
+      --muted: #9aa5b4;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Cairo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1000px, 92%); margin-inline: auto; }
+    header { border-bottom: 1px solid var(--border); padding: 1.1rem 0; }
+    .nav { display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-weight: 800; font-size: 1.15rem; color: var(--gold); }
+    .hero { padding: 3rem 0 1.5rem; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; }
+    .hero p { color: var(--muted); }
+    .games-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0 4rem;
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.6rem;
+    }
+    .panel h2 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--gold); }
+    .panel p { color: var(--muted); font-size: 0.92rem; margin-bottom: 1rem; }
+    .btn {
+      background: var(--gold);
+      color: #0b0f14;
+      border: none;
+      border-radius: 10px;
+      padding: 0.65rem 1.2rem;
+      font-family: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .game-row { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+    input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.6rem 0.9rem;
+      border-radius: 10px;
+      font-family: inherit;
+      width: 140px;
+    }
+    .feedback { margin-top: 0.9rem; font-weight: 600; color: var(--gold); min-height: 1.4rem; }
+    .score-box { font-size: 1.6rem; font-weight: 800; color: var(--gold); margin: 0.8rem 0; }
+    @media (max-width: 800px) { .games-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="https://a502.cam" class="brand">ألعاب الدواسر • PLAY</a>
+      <a href="https://a502.cam" style="color: var(--muted); font-size: 0.9rem;">العودة للرئيسية</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>ركن الألعاب التفاعلية</h1>
+      <p>ألعاب خفيفة تعمل مباشرة في المتصفح — جاهزة للتطوير وإضافة ألعاب جديدة.</p>
+    </section>
+
+    <section class="games-layout">
+      <div class="panel">
+        <h2>خمن الرقم السري</h2>
+        <p>اختر رقماً بين 1 و 50 وحاول الوصول للرقم الصحيح بأقل محاولات.</p>
+        <div class="game-row">
+          <input type="number" id="guessInput" min="1" max="50" placeholder="1 - 50" />
+          <button class="btn" id="guessBtn">تخمين</button>
+          <button class="btn-ghost" id="resetGuess">لعبة جديدة</button>
+        </div>
+        <div class="feedback" id="guessFeedback"></div>
+      </div>
+
+      <div class="panel">
+        <h2>عداد السرعة (10 ثوانٍ)</h2>
+        <p>اضغط على زر النقرة أكبر عدد ممكن من المرات خلال 10 ثوانٍ.</p>
+        <div class="score-box">النقاط: <span id="clickScore">0</span> | الوقت: <span id="timeLeft">10</span>ث</div>
+        <div class="game-row">
+          <button class="btn" id="clickBtn">انقر هنا!</button>
+          <button class="btn-ghost" id="resetClick">إعادة</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let secret = Math.floor(Math.random() * 50) + 1;
+    let tries = 0;
+    const guessInput = document.getElementById("guessInput");
+    const guessFeedback = document.getElementById("guessFeedback");
+
+    document.getElementById("guessBtn").addEventListener("click", () => {
+      const val = Number(guessInput.value);
+      if (!val || val < 1 || val > 50) {
+        guessFeedback.textContent = "أدخل رقماً صحيحاً بين 1 و 50.";
+        return;
+      }
+      tries++;
+      if (val === secret) {
+        guessFeedback.textContent = `مبروك! أصبت الرقم ${secret} في ${tries} محاولة.`;
+      } else if (val < secret) {
+        guessFeedback.textContent = "الرقم السري أكبر من تخمينك.";
+      } else {
+        guessFeedback.textContent = "الرقم السري أصغر من تخمينك.";
+      }
+    });
+
+    document.getElementById("resetGuess").addEventListener("click", () => {
+      secret = Math.floor(Math.random() * 50) + 1;
+      tries = 0;
+      guessInput.value = "";
+      guessFeedback.textContent = "بدأت جولة جديدة!";
+    });
+
+    let score = 0;
+    let time = 10;
+    let timer = null;
+    const scoreEl = document.getElementById("clickScore");
+    const timeEl = document.getElementById("timeLeft");
+
+    document.getElementById("clickBtn").addEventListener("click", () => {
+      if (time <= 0) return;
+      if (!timer) {
+        timer = setInterval(() => {
+          time--;
+          timeEl.textContent = time;
+          if (time <= 0) {
+            clearInterval(timer);
+            timer = null;
+          }
+        }, 1000);
+      }
+      score++;
+      scoreEl.textContent = score;
+    });
+
+    document.getElementById("resetClick").addEventListener("click", () => {
+      clearInterval(timer);
+      timer = null;
+      score = 0;
+      time = 10;
+      scoreEl.textContent = score;
+      timeEl.textContent = time;
+    });
+  </script>
+</body>
+</html>
