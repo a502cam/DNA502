@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أخبار الدواسر | آخر المستجدات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #121821;
+      --gold: #d4af37;
+      --gold-soft: rgba(212, 175, 55, 0.14);
+      --text: #f4f6f8;
+      --muted: #9aa5b4;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Cairo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1050px, 92%); margin-inline: auto; }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 0;
+      position: sticky;
+      top: 0;
+      background: rgba(11, 15, 20, 0.9);
+      backdrop-filter: blur(10px);
+    }
+    .nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .brand { font-weight: 800; font-size: 1.2rem; color: var(--gold); }
+    .nav-links { display: flex; gap: 1.25rem; color: var(--muted); font-size: 0.95rem; font-weight: 600; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .ticker {
+      margin-top: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-right: 4px solid var(--gold);
+      border-radius: 12px;
+      padding: 0.85rem 1.1rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+    .ticker-label {
+      background: var(--gold);
+      color: #0b0f14;
+      font-weight: 800;
+      padding: 0.2rem 0.65rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+    .hero { padding: 2.5rem 0 1.5rem; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; }
+    .hero p { color: var(--muted); }
+    .news-list { display: grid; gap: 1.2rem; padding-bottom: 4rem; }
+    .news-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+    .news-top { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+    .badge {
+      background: var(--gold-soft);
+      color: var(--gold);
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .date { color: var(--muted); font-size: 0.85rem; }
+    .news-card h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .news-card p { color: var(--muted); font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="https://a502.cam" class="brand">أخبار الدواسر • NEWS</a>
+      <nav class="nav-links">
+        <a href="https://a502.cam">الرئيسية</a>
+        <a href="https://blog.a502.cam">المدونة</a>
+        <a href="https://news.a502.cam" class="active">الأخبار</a>
+        <a href="https://play.a502.cam">الألعاب</a>
+        <a href="https://mail.a502.cam">البريد</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="ticker">
+      <span class="ticker-label">عاجل / مستجدات</span>
+      <span>مرحباً بكم في منصة أخبار الدواسر — متابعة مستمرة للإعلانات والتحديثات الجديدة.</span>
+    </div>
+
+    <section class="hero">
+      <h1>مركز الأخبار والتحديثات</h1>
+      <p>أحدث الأخبار والإعلانات المرتبطة بالمنصة والمشاريع.</p>
+    </section>
+
+    <section class="news-list">
+      <article class="news-card">
+        <div class="news-top">
+          <span class="badge">إعلان</span>
+          <span class="date">تحديث مباشر</span>
+        </div>
+        <h2>تفعيل النطاقات الفرعية وربط الصفحات المتخصصة</h2>
+        <p>تم إعداد الهيكل الأساسي لتوزيع الصفحات الفرعية للمدونة والأخبار والألعاب والبريد تحت نطاق a502.cam.</p>
+      </article>
+
+      <article class="news-card">
+        <div class="news-top">
+          <span class="badge">تطوير</span>
+          <span class="date">مستمر</span>
+        </div>
+        <h2>توسعة الأقسام وإضافة محتوى تفاعلي جديد</h2>
+        <p>يجري العمل على إضافة المزيد من المقالات والأخبار والألعاب التفاعلية بشكل تدريجي.</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
