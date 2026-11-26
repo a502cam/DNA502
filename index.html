@@ -1,61 +1,612 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تجارة الدواسر | DNA502</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تجارة الدواسر | أصالة وثقة وجودة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background-color: #0f172a; color: #f8fafc; line-height: 1.6; }
-    header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 3rem 1.5rem; text-align: center; border-bottom: 2px solid #d97706; }
-    header h1 { font-size: 2.2rem; color: #fbbf24; margin-bottom: 0.5rem; }
-    header p { color: #cbd5e1; font-size: 1.1rem; }
-    .container { max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; }
-    .card { background: #1e293b; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #334155; }
-    .card h2 { color: #fbbf24; margin-bottom: 0.75rem; font-size: 1.4rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem; }
-    .item { background: #0f172a; padding: 1.2rem; border-radius: 8px; border-right: 4px solid #d97706; }
-    .item h3 { color: #f8fafc; margin-bottom: 0.4rem; }
-    .item p { color: #94a3b8; font-size: 0.95rem; }
-    footer { text-align: center; padding: 2rem; color: #64748b; font-size: 0.9rem; border-top: 1px solid #1e293b; margin-top: 3rem; }
+    :root {
+      --bg-dark: #0b0f14;
+      --bg-card: #121821;
+      --bg-card-hover: #18202c;
+      --gold: #d4af37;
+      --gold-soft: rgba(212, 175, 55, 0.14);
+      --text-main: #f4f6f8;
+      --text-muted: #9aa5b4;
+      --border: rgba(255, 255, 255, 0.08);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Cairo", sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1140px, 92%);
+      margin-inline: auto;
+    }
+
+    /* Header / Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 15, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 74px;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--gold);
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--gold-soft);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 12px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #0b0f14;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      border-radius: 10px;
+      padding: 0.45rem 0.75rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 5.5rem 0 4.5rem;
+      background:
+        radial-gradient(circle at 80% 15%, rgba(212, 175, 55, 0.14), transparent 45%),
+        radial-gradient(circle at 15% 80%, rgba(212, 175, 55, 0.07), transparent 40%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      color: var(--gold);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 4.5vw, 3.3rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 1.8rem;
+      max-width: 58ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .hero-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .stat-item {
+      padding: 1rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 4.5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto 3rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.25rem);
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: var(--bg-card-hover);
+      border-color: rgba(212, 175, 55, 0.35);
+    }
+
+    .card-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: var(--gold-soft);
+      color: var(--gold);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.15rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Contact Form */
+    .contact-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.7rem;
+      color: var(--gold);
+    }
+
+    .contact-info p {
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .info-list {
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+      color: var(--text-main);
+      font-size: 0.95rem;
+    }
+
+    form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .form-status {
+      font-size: 0.9rem;
+      color: var(--gold);
+      min-height: 1.4rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.8rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .cards-grid,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .menu-toggle {
+        display: inline-block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 74px;
+        right: 0;
+        left: 0;
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 1.25rem;
+        gap: 1rem;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+    }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>تجارة الدواسر</h1>
-    <p>منصة متكاملة للتجارة والأعمال والمشاريع — DNA502</p>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <span class="brand-mark">502</span>
+        <span>تجارة الدواسر</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="القائمة">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#services">خدماتنا</a></li>
+        <li><a href="#values">مزايانا</a></li>
+        <li><a href="#contact">تواصل معنا</a></li>
+      </ul>
+
+      <a href="#contact" class="btn btn-gold">اطلب عرض سعر</a>
+    </div>
   </header>
 
-  <main class="container">
-    <section class="card">
-      <h2>نبذة عن المنصة</h2>
-      <p>أهلاً بكم في موقع تجارة الدواسر، بوابتكم لعرض المنتجات، الخدمات، والفرص التجارية بكل موثوقية واحترافية.</p>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge">منصة أعمال ومبادرات • DNA502</span>
+          <h1><span>تجارة الدواسر</span> — جودة راسخة وشراكات موثوقة</h1>
+          <p>
+            نقدم حلولاً تجارية ومشاريع رقمية ومبادرات نوعية تجمع بين وضوح الرؤية وسرعة التنفيذ،
+            مع التزام كامل بالمصداقية والكفاءة في خدمة عملائنا وشركائنا.
+          </p>
+          <div class="hero-actions">
+            <a href="#services" class="btn btn-gold">استكشف الخدمات</a>
+            <a href="#contact" class="btn btn-outline">تواصل مباشرة</a>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="stat-item">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">التزام بالمواعيد والشفافية في التعامل</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">24/7</div>
+            <div class="stat-label">جاهزية واستجابة مستمرة للاستفسارات</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">DNA502</div>
+            <div class="stat-label">هوية رقمية مستقلة ومباشرة</div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>الأقسام والخدمات</h2>
-      <div class="grid">
-        <div class="item">
-          <h3>المنتجات والعروض</h3>
-          <p>استعراض أحدث السلع والمنتجات المتوفرة للطلب المباشر.</p>
+    <section id="services">
+      <div class="container">
+        <div class="section-header">
+          <h2>خدماتنا وأقسامنا</h2>
+          <p>مساحات عمل متكاملة صُممت لتلبية الاحتياجات التجارية والرقمية بكفاءة عالية.</p>
         </div>
-        <div class="item">
-          <h3>الخدمات التجارية</h3>
-          <p>حلول وخدمات متخصصة لدعم المشاريع والأعمال.</p>
+
+        <div class="cards-grid">
+          <article class="card">
+            <div class="card-icon">01</div>
+            <h3>التجارة والتوريد</h3>
+            <p>
+              إدارة وتوريد المنتجات والخيارات التجارية الموثوقة وفق معايير جودة واضحة وتسعير مدروس.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">02</div>
+            <h3>المشاريع والمنصات الرقمية</h3>
+            <p>
+              بناء وتشغيل صفحات ومواقع ويب سريعة ومستقرة تعتمد على بنية حديثة وسهلة التطوير.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">03</div>
+            <h3>الشراكات والاستشارات</h3>
+            <p>
+              تأسيس علاقات عمل طويلة الأمد ودعم المبادرات العملية بخطوات واضحة وقابلة للتنفيذ.
+            </p>
+          </article>
         </div>
-        <div class="item">
-          <h3>التواصل والطلبات</h3>
-          <p>قنوات تواصل سريعة ومباشرة لخدمة العملاء والشركاء.</p>
+      </div>
+    </section>
+
+    <section id="values">
+      <div class="container">
+        <div class="section-header">
+          <h2>لماذا تجارة الدواسر؟</h2>
+          <p>ركائز أساسية تحكم عملنا اليومي وتضمن تجربة واضحة ومباشرة.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card">
+            <div class="card-icon">✓</div>
+            <h3>وضوح ومباشرة</h3>
+            <p>
+              تواصل مباشر دون تعقيد، وتفاصيل دقيقة لكل خطوة من بداية الطلب حتى التسليم.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">⚡</div>
+            <h3>سرعة وأداء</h3>
+            <p>
+              استجابة سريعة وتجربة تصفح خفيفة وسريعة على مختلف الأجهزة والشبكات.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">◈</div>
+            <h3>استقلالية وخصوصية</h3>
+            <p>
+              اعتماد على استضافة وبنية مستقلة تمنحك تحكماً كاملاً في المحتوى والظهور الرقمي.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2>تواصل معنا</h2>
+          <p>أرسل رسالتك أو استفسارك وسنقوم بالرد عليك في أقرب وقت.</p>
+        </div>
+
+        <div class="contact-box">
+          <div class="contact-info">
+            <h3>معلومات التواصل</h3>
+            <p>
+              يسعدنا استقبال استفساراتكم وطلبات التعاون والشراكة عبر نموذج التواصل المباشر.
+            </p>
+            <ul class="info-list">
+              <li><strong>المشروع:</strong> تجارة الدواسر (DNA502)</li>
+              <li><strong>النطاق:</strong> a502.cam</li>
+              <li><strong>أوقات العمل:</strong> يومياً لخدمة العملاء</li>
+            </ul>
+          </div>
+
+          <form id="contactForm">
+            <div class="field">
+              <label for="name">الاسم</label>
+              <input type="text" id="name" name="name" placeholder="اكتب اسمك الكامل" required />
+            </div>
+
+            <div class="field">
+              <label for="phoneOrEmail">وسيلة التواصل (جوال أو بريد إلكتروني)</label>
+              <input type="text" id="phoneOrEmail" name="contact" placeholder="example@domain.com أو رقم الجوال" required />
+            </div>
+
+            <div class="field">
+              <label for="message">الرسالة</label>
+              <textarea id="message" name="message" rows="4" placeholder="اكتب تفاصيل طلبك أو استفسارك..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-gold">إرسال الرسالة</button>
+            <div class="form-status" id="formStatus"></div>
+          </form>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    جميع الحقوق محفوظة &copy; 2026 — تجارة الدواسر (DNA502)
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> تجارة الدواسر — جميع الحقوق محفوظة.</span>
+      <span>DNA502</span>
+    </div>
   </footer>
 
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    const contactForm = document.getElementById("contactForm");
+    const formStatus = document.getElementById("formStatus");
+    const yearEl = document.getElementById("year");
+
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => navLinks.classList.remove("open"));
+    });
+
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      formStatus.textContent = `شكراً لك يا ${name}، تم تجهيز رسالتك بنجاح. يمكنك أيضاً التواصل مباشرة عبر وسيلة التواصل المعتمدة.`;
+      contactForm.reset();
+    });
+  </script>
 </body>
 </html>
